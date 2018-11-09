@@ -31,8 +31,8 @@ public class FileServiceImpl implements FileService {
     }
 
     private static Double findTheLowestCoordination(List<Span> spans) {
-        Double a = spans.stream().map(Span::getFirstPylonDepth).sorted(Comparator.reverseOrder()).findFirst().get();
-        return a > spans.get(spans.size()-1).getSecondPylonDepth() ? a : spans.get(spans.size()-1).getSecondPylonDepth();
+        Double a = spans.stream().map(Span::getFirstPylonCoordination).sorted(Comparator.reverseOrder()).findFirst().get();
+        return a > spans.get(spans.size()-1).getSecondPylonCoordination() ? a : spans.get(spans.size()-1).getSecondPylonCoordination();
     }
 
     private static void generateDxfFile(DXFDocument dxfDocument, String fileName) {
@@ -86,9 +86,10 @@ public class FileServiceImpl implements FileService {
         firstPointCoordinations.setX(currentXcoordination);
         firstPointCoordinations.setY(-(span.getFirstPylonCoordination() + span.getFirstPylonHeight()));
 
+//        TODO: change hardcoded value of 120 - premised slack of wire
         PointCoordinations middlePointCoordinations = new PointCoordinations();
         middlePointCoordinations.setX(currentXcoordination + span.getX1());
-        middlePointCoordinations.setY(-(span.getFirstPylonHeight() - 50));
+        middlePointCoordinations.setY(-(span.getFirstPylonHeight() - 120));
 
         PointCoordinations lastPointCoordinations = new PointCoordinations();
         lastPointCoordinations.setX(currentXcoordination + span.getNextPylonDistance());
@@ -101,10 +102,6 @@ public class FileServiceImpl implements FileService {
                 middlePointCoordinations.getY(),
                 lastPointCoordinations.getX(),
                 lastPointCoordinations.getY());
-
-//        graphics.drawLine(firstPointCoordinations.getX(), firstPointCoordinations.getY(), circleCoordinations.getX(), circleCoordinations.getY());
-//        graphics.drawLine(middlePointCoordinations.getX(), middlePointCoordinations.getY(), circleCoordinations.getX(), circleCoordinations.getY());
-//        graphics.drawLine(lastPointCoordinations.getX(), lastPointCoordinations.getY(), circleCoordinations.getX(), circleCoordinations.getY());
 
         double arcRadius = findArcRadius(circleCoordinations, firstPointCoordinations.getX(), firstPointCoordinations.getY());
 
@@ -188,7 +185,7 @@ public class FileServiceImpl implements FileService {
 
     private static void drawSpanPylons(DXFGraphics graphics, Double currentXcoordination, Span span, int i) {
         graphics.setStroke(new BasicStroke(0.2f));
-        Double theLowestPylonPoint = span.getFirstPylonCoordination() - span.getFirstPylonDepth();
+        Double theLowestPylonPoint = span.getFirstPylonCoordination();
         Double totalPylonHeight = span.getFirstPylonHeight();
 
         if (i == 0) {
@@ -197,7 +194,7 @@ public class FileServiceImpl implements FileService {
                     currentXcoordination,-(totalPylonHeight + span.getFirstPylonCoordination()));
         }
 
-        theLowestPylonPoint = span.getSecondPylonCoordination() - span.getSecondPylonDepth();
+        theLowestPylonPoint = span.getSecondPylonCoordination();
         totalPylonHeight = span.getSecondPylonHeight();
         graphics.drawLine(
                 currentXcoordination + span.getNextPylonDistance(),-theLowestPylonPoint,

@@ -12,11 +12,9 @@ public class SpanDataProvider {
 
         Span firstSpan = new Span();
         firstSpan.setFirstPylonHeight(320d);
-        firstSpan.setFirstPylonDepth(110d);
-        firstSpan.setFirstPylonCoordination(25d);
+        firstSpan.setFirstPylonCoordination(0d);
 
         firstSpan.setSecondPylonHeight(450d);
-        firstSpan.setSecondPylonDepth(170d);
         firstSpan.setSecondPylonCoordination(45d);
         firstSpan.setNextPylonDistance(530d);
         firstSpan.setX1(210d);
@@ -29,11 +27,9 @@ public class SpanDataProvider {
 
         Span secondSpan = new Span();
         secondSpan.setFirstPylonHeight(450d);
-        secondSpan.setFirstPylonDepth(170d);
-        secondSpan.setSecondPylonHeight(610d);
-        secondSpan.setSecondPylonDepth(190d);
+        secondSpan.setSecondPylonHeight(300d);
         secondSpan.setNextPylonDistance(720d);
-        secondSpan.setX1(210d);
+        secondSpan.setX1(510d);
         secondSpan.setFirstPylonCoordination(45d);
         secondSpan.setSecondPylonCoordination(20d);
         List<PointCoordinations> secondObstaclesCoordination = new ArrayList<PointCoordinations>();

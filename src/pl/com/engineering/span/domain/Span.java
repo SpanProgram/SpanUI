@@ -5,9 +5,7 @@ import java.util.List;
 public class Span {
 
     private Double firstPylonHeight;
-    private Double firstPylonDepth;
     private Double secondPylonHeight;
-    private Double secondPylonDepth;
     private Double nextPylonDistance;
     private Double firstPylonCoordination;
     private Double secondPylonCoordination;
@@ -46,28 +44,12 @@ public class Span {
         this.firstPylonHeight = firstPylonHeight;
     }
 
-    public Double getFirstPylonDepth() {
-        return firstPylonDepth;
-    }
-
-    public void setFirstPylonDepth(Double firstPylonDepth) {
-        this.firstPylonDepth = firstPylonDepth;
-    }
-
     public Double getSecondPylonHeight() {
         return secondPylonHeight;
     }
 
     public void setSecondPylonHeight(Double secondPylonHeight) {
         this.secondPylonHeight = secondPylonHeight;
-    }
-
-    public Double getSecondPylonDepth() {
-        return secondPylonDepth;
-    }
-
-    public void setSecondPylonDepth(Double secondPylonDepth) {
-        this.secondPylonDepth = secondPylonDepth;
     }
 
     public Double getNextPylonDistance() {
